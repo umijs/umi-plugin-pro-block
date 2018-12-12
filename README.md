@@ -1,9 +1,31 @@
-# umi-plugin-umi-plugin-pro-block
+# umi-plugin-pro-block
 
-[![NPM version](https://img.shields.io/npm/v/umi-plugin-umi-plugin-pro-block.svg?style=flat)](https://npmjs.org/package/umi-plugin-umi-plugin-pro-block)
-[![NPM downloads](http://img.shields.io/npm/dm/umi-plugin-umi-plugin-pro-block.svg?style=flat)](https://npmjs.org/package/umi-plugin-umi-plugin-pro-block)
+[![NPM version](https://img.shields.io/npm/v/umi-plugin-pro-block.svg?style=flat)](https://npmjs.org/package/umi-plugin-pro-block)
+[![NPM downloads](http://img.shields.io/npm/dm/umi-plugin-pro-block.svg?style=flat)](https://npmjs.org/package/umi-plugin-pro-block)
 
-A plugin for deliver umi block files like ant design pro structure
+A plugin for deliver umi block files like ant design pro structure.
+
+When you use `umi block demo` to download a block, if you did not use this plugin, you will get:
+
+```diff
+- src
+  - mock
+  - pages
++   - demo
++     - index.js
++     - _mock.js
+```
+
+And if you use it, you will get:
+
+```diff
+- src
+  - mock
++   - demo.js
+  - pages
++   - demo
++     - index.js
+```
 
 ## Usage
 
@@ -12,7 +34,7 @@ Configure in `.umirc.js`,
 ```js
 export default {
   plugins: [
-    ['umi-plugin-umi-plugin-pro-block', options],
+    ['umi-plugin-pro-block', options],
   ],
 }
 ```

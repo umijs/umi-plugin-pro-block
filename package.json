@@ -1,18 +1,18 @@
 {
-  "name": "umi-plugin-umi-plugin-pro-block",
+  "name": "umi-plugin-pro-block",
   "version": "0.0.1",
   "description": "A plugin for deliver umi block files like ant design pro structure",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/umijs/umi-plugin-umi-plugin-pro-block"
+    "url": "https://github.com/umijs/umi-plugin-pro-block"
   },
-  "homepage": "https://github.com/umijs/umi-plugin-umi-plugin-pro-block",
+  "homepage": "https://github.com/umijs/umi-plugin-pro-block",
   "authors": [
     "yutingzhao1991 <yutingzhao1991@sina.com>"
   ],
   "bugs": {
-    "url": "https://github.com/umijs/umi-plugin-umi-plugin-pro-block/issues"
+    "url": "https://github.com/umijs/umi-plugin-pro-block/issues"
   },
   "peerDependencies": {
     "umi": "2.x"
