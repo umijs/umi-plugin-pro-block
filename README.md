@@ -14,6 +14,7 @@ When you use `umi block demo` to download a block, if you did not use this plugi
 +   - demo
 +     - index.js
 +     - _mock.js
++     - service.js
 ```
 
 And if you use it, you will get:
@@ -22,10 +23,14 @@ And if you use it, you will get:
 - src
   - mock
 +   - demo.js
+  - service.js
++   - demo.js
   - pages
 +   - demo
 +     - index.js
 ```
+
+Ant will replace `umi-request` to `util(s)/request.js` if it exist.
 
 ## Usage
 
@@ -34,14 +39,14 @@ Configure in `.umirc.js`,
 ```js
 export default {
   plugins: [
-    ['umi-plugin-pro-block', options],
+    ['umi-plugin-pro-block', {}],
   ],
 }
 ```
 
 ## Options
 
-TODO
+{}
 
 ## LICENSE
 
