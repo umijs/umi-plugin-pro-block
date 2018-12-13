@@ -1,6 +1,6 @@
 {
   "name": "umi-plugin-pro-block",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A plugin for deliver umi block files like ant design pro structure",
   "license": "MIT",
   "repository": {
