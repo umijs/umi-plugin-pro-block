@@ -5,7 +5,7 @@ import { existsSync } from 'fs';
 
 const debug = require('debug')('umi-plugin-pro-block');
 
-export default function (api) {
+export default function (api, opts = {}) {
   const { paths, config } = api;
 
   let hasUtil, hasService, newFileName;
@@ -17,11 +17,11 @@ export default function (api) {
   });
 
   api._modifyBlockTarget((target, { sourceName }) => {
-    if (sourceName === '_mock.js') {
+    if (sourceName === '_mock.js' && opts.moveMock !== false) {
       // src/pages/test/t/_mock.js -> mock/test-t.js
       return join(paths.cwd, 'mock', `${newFileName}.js`);
     }
-    if (sourceName === 'service.js' && hasService) {
+    if (sourceName === 'service.js' && hasService && opts.moveService !== false) {
       // src/pages/test/t/service.js -> services/test.t.js
       return join(paths.absSrcPath, config.singular ? 'service' : 'services', `${newFileName}.js`);
     }
@@ -31,10 +31,10 @@ export default function (api) {
   // umi-request -> @utils/request
   // src/pages/test/t/service.js -> services/test.t.js
   api._modifyBlockFile((content) => {
-    if (hasUtil) {
+    if (hasUtil && opts.modifyRequest !== false) {
       content = content.replace(/[\'\"]umi\-request[\'\"]/g, `'@/util${config.singular ? '' : 's'}/request'`);
     }
-    if (hasService) {
+    if (hasService && opts.moveService !== false) {
       content = content.replace(/[\'\"][\.\/]+service[\'\"]/g, `'@/service${config.singular ? '' : 's'}/${newFileName}'`);
     }
     return content;
