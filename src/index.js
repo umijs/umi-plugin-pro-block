@@ -8,6 +8,8 @@ const debug = require('debug')('umi-plugin-pro-block');
 export default function (api, opts = {}) {
   const { paths, config } = api;
 
+  debug('options', opts);
+
   let hasUtil, hasService, newFileName;
   api.beforeBlockWriting(({ sourcePath, blockPath }) => {
     hasUtil = existsSync(join(paths.absSrcPath, `util${config.singular ? '' : 's'}`, 'request.js'));
@@ -38,5 +40,16 @@ export default function (api, opts = {}) {
       content = content.replace(/[\'\"][\.\/]+service[\'\"]/g, `'@/service${config.singular ? '' : 's'}/${newFileName}'`);
     }
     return content;
+  });
+
+  api._modifyBlockNewRouteConfig(memo => {
+    if (opts.autoAddMenu === false) {
+      return memo;
+    }
+    return {
+      name: memo.path.split('/').pop(),
+      icon: 'smile',
+      ...memo,
+    };
   });
 }

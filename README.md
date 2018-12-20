@@ -51,6 +51,7 @@ export default {
   moveMock: false, // whether move _mock.js to mock, default to true
   moveService: false, // whether move service.js to src/services/, default to true
   modifyRequest: false, // whether modify umi-request to util(s)/request (if it exist), default to true
+  autoAddMenu: false, // whether add name and icon config to route config when download a pro, default to true
 }
 ```
 
