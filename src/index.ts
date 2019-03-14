@@ -2,10 +2,18 @@
 // - https://umijs.org/plugin/develop.html
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { IApi } from 'umi-types';
 
 const debug = require('debug')('umi-plugin-pro-block');
 
-export default function (api, opts = {}) {
+export interface ProBlockOption {
+  moveMock?: boolean,
+  moveService?: boolean,
+  modifyRequest?: boolean,
+  autoAddMenu?: boolean,
+}
+
+export default function (api: IApi, opts: ProBlockOption = {}) {
   const { paths, config } = api;
 
   debug('options', opts);
