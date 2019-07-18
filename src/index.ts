@@ -20,9 +20,7 @@ export default function(api: IApi, opts: ProBlockOption = {}) {
 
   let hasUtil, hasService, newFileName;
   api.beforeBlockWriting(({ sourcePath, blockPath }) => {
-    hasUtil = existsSync(
-      join(paths.absSrcPath, `util${config.singular ? "" : "s"}`, "request.js")
-    );
+    hasUtil = existsSync(join(paths.absSrcPath, `utils`, "request.js"));
     hasService = existsSync(join(sourcePath, "./src/service.js"));
     newFileName = blockPath.replace(/^\//, "").replace(/\//g, "");
     debug(
