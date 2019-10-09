@@ -1,10 +1,10 @@
 // ref:
 // - https://umijs.org/plugin/develop.html
-import { join } from "path";
-import { existsSync } from "fs";
-import { IApi } from "umi-types";
+import { join } from 'path';
+import { existsSync } from 'fs';
+import { IApi } from 'umi-types';
 
-const debug = require("debug")("umi-plugin-pro-block");
+const debug = require('debug')('umi-plugin-pro-block');
 
 export interface ProBlockOption {
   moveMock?: boolean;
@@ -16,42 +16,33 @@ export interface ProBlockOption {
 export default function(api: IApi, opts: ProBlockOption = {}) {
   const { paths, config } = api;
 
-  debug("options", opts);
+  debug('options', opts);
 
   let hasUtil, hasService, newFileName;
   api.beforeBlockWriting(({ sourcePath, blockPath }) => {
     const utilsPath = join(paths.absSrcPath, `utils`);
     hasUtil =
-      existsSync(join(utilsPath, "request.js")) ||
-      existsSync(join(utilsPath, "request.ts"));
-    hasService = existsSync(join(sourcePath, "./src/service.js"));
-    newFileName = blockPath.replace(/^\//, "").replace(/\//g, "");
+      existsSync(join(utilsPath, 'request.js')) || existsSync(join(utilsPath, 'request.ts'));
+    hasService = existsSync(join(sourcePath, './src/service.js'));
+    newFileName = blockPath.replace(/^\//, '').replace(/\//g, '');
     debug(
-      "beforeBlockWriting... hasUtil:",
+      'beforeBlockWriting... hasUtil:',
       hasUtil,
-      "hasService:",
+      'hasService:',
       hasService,
-      "newFileName:",
-      newFileName
+      'newFileName:',
+      newFileName,
     );
   });
 
   api._modifyBlockTarget((target, { sourceName }) => {
-    if (sourceName === "_mock.js" && opts.moveMock !== false) {
+    if (sourceName === '_mock.js' && opts.moveMock !== false) {
       // src/pages/test/t/_mock.js -> mock/test-t.js
-      return join(paths.cwd, "mock", `${newFileName}.js`);
+      return join(paths.cwd, 'mock', `${newFileName}.js`);
     }
-    if (
-      sourceName === "service.js" &&
-      hasService &&
-      opts.moveService !== false
-    ) {
+    if (sourceName === 'service.js' && hasService && opts.moveService !== false) {
       // src/pages/test/t/service.js -> services/test.t.js
-      return join(
-        paths.absSrcPath,
-        config.singular ? "service" : "services",
-        `${newFileName}.js`
-      );
+      return join(paths.absSrcPath, config.singular ? 'service' : 'services', `${newFileName}.js`);
     }
     return target;
   });
@@ -62,13 +53,13 @@ export default function(api: IApi, opts: ProBlockOption = {}) {
     if (hasUtil && opts.modifyRequest !== false) {
       content = content.replace(
         /[\'\"]umi\-request[\'\"]/g,
-        `'@/util${config.singular ? "" : "s"}/request'`
+        `'@/util${config.singular ? '' : 's'}/request'`,
       );
     }
     if (hasService && opts.moveService !== false) {
       content = content.replace(
         /[\'\"][\.\/]+service[\'\"]/g,
-        `'@/service${config.singular ? "" : "s"}/${newFileName}'`
+        `'@/service${config.singular ? '' : 's'}/${newFileName}'`,
       );
     }
     return content;
@@ -78,9 +69,11 @@ export default function(api: IApi, opts: ProBlockOption = {}) {
     if (opts.autoAddMenu === false) {
       return memo;
     }
+    const path = memo.path.indexOf('/') === 0 ? 'smile' : undefined;
     return {
-      name: memo.path.split("/").pop(),
-      ...memo
+      name: memo.name || memo.path.split('/').pop(),
+      path,
+      ...memo,
     };
   });
 }
