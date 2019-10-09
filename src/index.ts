@@ -69,10 +69,10 @@ export default function(api: IApi, opts: ProBlockOption = {}) {
     if (opts.autoAddMenu === false) {
       return memo;
     }
-    const path = memo.path.indexOf('/') === 0 ? 'smile' : undefined;
+    const icon = memo.path.indexOf('/') === 0 ? 'smile' : undefined;
     return {
       name: memo.name || memo.path.split('/').pop(),
-      path,
+      icon,
       ...memo,
     };
   });
