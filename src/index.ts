@@ -16,7 +16,7 @@ export interface ProBlockOption {
 }
 
 export default function(api: IApi, opts: ProBlockOption = {}) {
-  const { paths, config } = api;
+  const { paths, userConfig = {} } = api;
   api.describe({
     key: 'ProBlockOption',
     config: {
@@ -66,7 +66,7 @@ export default function(api: IApi, opts: ProBlockOption = {}) {
         // src/pages/test/t/service.js -> services/test.t.js
         return join(
           paths.absSrcPath,
-          config.singular ? 'service' : 'services',
+          userConfig.singular ? 'service' : 'services',
           `${newFileName}.js`
         );
       }
