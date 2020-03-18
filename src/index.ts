@@ -79,13 +79,13 @@ export default function(api: IApi, opts: ProBlockOption = {}) {
       if (hasUtil && opts.modifyRequest !== false) {
         content = content.replace(
           /[\'\"]umi\-request[\'\"]/g,
-          `'@/util${config.singular ? '' : 's'}/request'`
+          `'@/util${userConfig.singular ? '' : 's'}/request'`
         );
       }
       if (hasService && opts.moveService !== false) {
         content = content.replace(
           /[\'\"][\.\/]+service[\'\"]/g,
-          `'@/service${config.singular ? '' : 's'}/${newFileName}'`
+          `'@/service${userConfig.singular ? '' : 's'}/${newFileName}'`
         );
       }
       return content;
