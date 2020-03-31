@@ -1,6 +1,6 @@
 {
   "name": "umi-plugin-pro-block",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A plugin for deliver umi block files like ant design pro structure",
   "homepage": "https://github.com/umijs/umi-plugin-pro-block",
   "bugs": {
